@@ -1,0 +1,26 @@
+<h1>Upcoming Events</h1>
+
+<div class="events">
+  <% @events.each do |event| %>
+    <div class="event-card">
+
+      <% if event.image_link.present? %>
+        <img src="<%= event.image_link %>" alt="<%= event.title %>" width="300">
+      <% end %>
+
+      <h2><%= event.title %></h2>
+
+      <p>
+        <strong>Date:</strong>
+        <%= event.start_date.strftime("%d %B %Y, %H:%M") %>
+      </p>
+
+      <p>
+        <%= truncate(event.description, length: 200) %>
+      </p>
+
+    </div>
+
+    <hr>
+  <% end %>
+</div>
