@@ -8,7 +8,9 @@
         <img src="<%= event.image_link %>" alt="<%= event.title %>" width="300">
       <% end %>
 
-      <h2><%= event.title %></h2>
+      <h2>
+        <%= link_to event.title, event_path(event) %>
+      </h2>
 
       <p>
         <strong>Date:</strong>

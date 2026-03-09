@@ -1,0 +1,22 @@
+<h1><%= @event.title %></h1>
+
+<% if @event.image_link.present? %>
+  <div>
+    <img src="<%= @event.image_link %>" alt="<%= @event.title %>" width="500">
+  </div>
+<% end %>
+
+<p>
+  <strong>Date:</strong>
+  <%= @event.start_date.strftime("%d %B %Y, %H:%M") %>
+</p>
+
+<p>
+  <%= @event.description %>
+</p>
+
+<hr>
+
+<div>
+  <%= link_to "Back to events", events_path %>
+</div>
