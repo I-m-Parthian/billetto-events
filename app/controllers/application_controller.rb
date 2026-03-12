@@ -16,8 +16,8 @@ class ApplicationController < ActionController::Base
   private
 
   def require_clerk_user
-    return if clerk.user
+    return if current_user.present?
 
-    redirect_to "https://next-snake-88.accounts.dev/sign-in", allow_other_host: true
+    redirect_to "#{ENV['CLERK_SIGN_IN_URL']}", allow_other_host: true
   end
 end

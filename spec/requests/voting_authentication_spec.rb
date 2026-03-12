@@ -13,7 +13,7 @@ RSpec.describe "Voting Authentication", type: :request do
   end
 
   it "redirects unauthenticated users to sign in" do
-    post event_upvote_path(event)
+    post upvote_event_path(event)
 
     expect(response).to redirect_to(
       "https://next-snake-88.accounts.dev/sign-in"

@@ -2,7 +2,7 @@ class VotesController < ApplicationController
   before_action :require_clerk_user
 
   def upvote
-    event = Event.find(params[:event_id])
+    event = Event.find(params[:id])
 
     Rails.configuration.command_bus.call(
       UpvoteEvent.new(
@@ -15,7 +15,7 @@ class VotesController < ApplicationController
   end
 
   def downvote
-    event = Event.find(params[:event_id])
+    event = Event.find(params[:id])
 
     Rails.configuration.command_bus.call(
       DownvoteEvent.new(

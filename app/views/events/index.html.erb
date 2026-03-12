@@ -2,7 +2,7 @@
 
   <div class="flex justify-between items-center mb-10">
     <h1 class="text-3xl font-bold text-gray-800">
-      Upcoming Events
+      Billetto Events
     </h1>
 
     <div class="flex gap-3">
@@ -12,11 +12,19 @@
             method: :post,
             class: "px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700" %>
 
-      <% if current_user %>
-        <a href="https://next-snake-88.accounts.dev/sign-out"
-           class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
-          Logout
-        </a>
+      <% if current_user.present? %>
+
+        <%= button_to "Logout",
+              logout_path,
+              method: :delete,
+              class: "px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600" %>
+
+      <% else %>
+
+        <%= button_to "Sign In",
+              ENV["CLERK_SIGN_IN_URL"],
+              class: "px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-900" %>
+
       <% end %>
 
     </div>
@@ -78,11 +86,13 @@
               <%= button_to "👍",
                     upvote_event_path(event),
                     method: :post,
+                    data: { turbo: false },
                     class: "px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600" %>
 
               <%= button_to "👎",
                     downvote_event_path(event),
                     method: :post,
+                    data: { turbo: false },
                     class: "px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600" %>
 
             </div>
