@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsEventStore::Browser => '/res' if Rails.env.development?
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -11,4 +12,7 @@ Rails.application.routes.draw do
 
   # root "events#index"
   resources :events, only: [:index, :show]
+  resources :events, only: [:index, :show] do
+    post :upvote, to: "votes#upvote"
+  end
 end

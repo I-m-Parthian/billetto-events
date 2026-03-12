@@ -26,6 +26,12 @@
         <%= truncate(event.description, length: 200) %>
       </p>
 
+      <p>
+       👍 <%= event.upvotes %>
+      </p>
+
+      <%= button_to "Upvote", event_upvote_path(event), method: :post %>
+
     </div>
 
     <hr>

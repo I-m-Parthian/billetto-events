@@ -67,3 +67,4 @@ gem 'clerk-sdk-ruby', '~> 5.1', '>= 5.1.2'
 
 # A pure ruby implementation of the RFC 7519 OAuth JSON Web Token (JWT) standard
 gem 'jwt', '~> 3.1', '>= 3.1.2'
+gem "rails_event_store", "~> 2.18.0"
