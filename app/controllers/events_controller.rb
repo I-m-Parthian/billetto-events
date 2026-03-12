@@ -8,6 +8,11 @@ class EventsController < ApplicationController
   def show
   end
 
+  def fetch
+    Events::IngestFromBilletto.new.call
+    redirect_to events_path, notice: "Events fetched successfully"
+  end
+
   private
 
   def set_event

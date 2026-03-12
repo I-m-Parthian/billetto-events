@@ -12,7 +12,13 @@ Rails.application.routes.draw do
 
   # root "events#index"
   resources :events, only: [:index, :show] do
-    post :upvote, to: "votes#upvote"
-    post :downvote, to: "votes#downvote"
+    member do
+      post :upvote, to: "votes#upvote"
+      post :downvote, to: "votes#downvote"
+    end
+
+    collection do
+      post :fetch
+    end
   end
 end

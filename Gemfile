@@ -73,3 +73,6 @@ gem 'clerk-sdk-ruby', require: 'clerk'
 # A pure ruby implementation of the RFC 7519 OAuth JSON Web Token (JWT) standard
 gem 'jwt', '~> 3.1', '>= 3.1.2'
 gem "rails_event_store", "~> 2.18.0"
+
+# Integrate Tailwind CSS with the asset pipeline in Rails.
+gem 'tailwindcss-rails', '~> 4.4'

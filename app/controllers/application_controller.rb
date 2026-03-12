@@ -18,6 +18,6 @@ class ApplicationController < ActionController::Base
   def require_clerk_user
     return if clerk.user
 
-    redirect_to "https://next-snake-88.accounts.dev/sign-in"
+    redirect_to "https://next-snake-88.accounts.dev/sign-in", allow_other_host: true
   end
 end

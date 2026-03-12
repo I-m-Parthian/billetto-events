@@ -1,40 +1,100 @@
-<h1>Upcoming Events</h1>
+<div class="max-w-6xl mx-auto px-6 py-10">
 
-<div class="events">
-  <% @events.each do |event| %>
-    <div class="event-card">
+  <div class="flex justify-between items-center mb-10">
+    <h1 class="text-3xl font-bold text-gray-800">
+      Upcoming Events
+    </h1>
 
-      <% if event.image_link.present? %>
-        <img src="<%= event.image_link %>" alt="<%= event.title %>" width="300">
+    <div class="flex gap-3">
+
+      <%= button_to "Fetch Events",
+            fetch_events_path,
+            method: :post,
+            class: "px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700" %>
+
+      <% if current_user %>
+        <a href="https://next-snake-88.accounts.dev/sign-out"
+           class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
+          Logout
+        </a>
       <% end %>
 
-      <h2>
-        <%= link_to event.title, event_path(event) %>
-      </h2>
-
-      <p>
-        <strong>Start Date:</strong>
-        <%= event.start_date.strftime("%d %B %Y, %H:%M") %>
-      </p>
-
-      <p>
-        <strong>End Date:</strong>
-        <%= event.end_date.strftime("%d %B %Y, %H:%M") %>
-      </p>
-
-      <p>
-        <%= truncate(event.description, length: 200) %>
-      </p>
-
-      <p>
-       👍 <%= event.upvotes %>
-       👎 <%= event.downvotes %>
-      </p>
-
-      <%= button_to "Upvote", event_upvote_path(event), method: :post %>
-      <%= button_to "Downvote", event_downvote_path(event), method: :post %>
     </div>
+  </div>
 
-    <hr>
-  <% end %>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+    <% @events.each do |event| %>
+
+      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
+
+        <% if event.image_link.present? %>
+          <img
+            src="<%= event.image_link %>"
+            alt="<%= event.title %>"
+            class="w-full h-48 object-cover">
+        <% end %>
+
+        <div class="p-5">
+
+          <h2 class="text-lg font-semibold mb-2">
+            <%= link_to event.title,
+                  event_path(event),
+                  class: "hover:text-blue-600" %>
+          </h2>
+
+          <p class="text-sm text-gray-500 mb-1">
+            <strong>Start:</strong>
+            <%= event.start_date.strftime("%d %b %Y, %H:%M") %>
+          </p>
+
+          <p class="text-sm text-gray-500 mb-3">
+            <strong>End:</strong>
+            <%= event.end_date.strftime("%d %b %Y, %H:%M") %>
+          </p>
+
+          <p class="text-gray-700 text-sm mb-4">
+            <%= truncate(event.description, length: 120) %>
+          </p>
+
+          <div class="flex items-center justify-between">
+
+            <div class="flex gap-3 text-sm">
+
+              <span class="bg-green-100 text-green-700 px-2 py-1 rounded">
+                👍 <%= event.upvotes %>
+              </span>
+
+              <span class="bg-red-100 text-red-700 px-2 py-1 rounded">
+                👎 <%= event.downvotes %>
+              </span>
+
+            </div>
+
+
+            <div class="flex gap-2">
+
+              <%= button_to "👍",
+                    upvote_event_path(event),
+                    method: :post,
+                    class: "px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600" %>
+
+              <%= button_to "👎",
+                    downvote_event_path(event),
+                    method: :post,
+                    class: "px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600" %>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    <% end %>
+
+  </div>
+
 </div>
