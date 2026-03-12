@@ -14,8 +14,9 @@ Rails.configuration.to_prepare do
   Rails.configuration.event_store.tap do |store|
     store.subscribe(
       VoteProjection.new,
-      to: [EventUpvoted]
+      to: [ EventUpvoted, EventDownvoted ]
     )
+
     store.subscribe_to_all_events(RailsEventStore::LinkByEventType.new)
     store.subscribe_to_all_events(RailsEventStore::LinkByCorrelationId.new)
     store.subscribe_to_all_events(RailsEventStore::LinkByCausationId.new)
@@ -26,6 +27,11 @@ Rails.configuration.to_prepare do
     bus.register(
       UpvoteEvent,
       UpvoteEventHandler.new
+    )
+
+    bus.register(
+      DownvoteEvent,
+      DownvoteEventHandler.new
     )
   end
 end

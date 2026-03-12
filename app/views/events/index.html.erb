@@ -28,10 +28,11 @@
 
       <p>
        👍 <%= event.upvotes %>
+       👎 <%= event.downvotes %>
       </p>
 
       <%= button_to "Upvote", event_upvote_path(event), method: :post %>
-
+      <%= button_to "Downvote", event_downvote_path(event), method: :post %>
     </div>
 
     <hr>
