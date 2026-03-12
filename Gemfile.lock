@@ -424,7 +424,7 @@ DEPENDENCIES
   bootsnap
   brakeman
   bundler-audit
-  clerk-sdk-ruby (~> 5.1, >= 5.1.2)
+  clerk-sdk-ruby
   debug
   dotenv-rails (~> 3.2)
   image_processing (~> 1.2)

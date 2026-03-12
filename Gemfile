@@ -63,7 +63,7 @@ end
 gem 'dotenv-rails', '~> 3.2'
 
 # Ruby Client SDK
-gem 'clerk-sdk-ruby', '~> 5.1', '>= 5.1.2'
+gem 'clerk-sdk-ruby', require: 'clerk'
 
 # A pure ruby implementation of the RFC 7519 OAuth JSON Web Token (JWT) standard
 gem 'jwt', '~> 3.1', '>= 3.1.2'

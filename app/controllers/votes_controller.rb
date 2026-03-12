@@ -1,4 +1,6 @@
 class VotesController < ApplicationController
+  before_action :require_clerk_user
+
   def upvote
     event = Event.find(params[:event_id])
 

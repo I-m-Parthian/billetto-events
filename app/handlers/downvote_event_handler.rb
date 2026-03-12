@@ -1,5 +1,7 @@
 class DownvoteEventHandler
   def call(command)
+    return if already_voted?(command)
+
     event_store.publish(
       EventDownvoted.new(
         data: {
@@ -19,5 +21,13 @@ class DownvoteEventHandler
 
   def stream_name(event_id)
     "Event$#{event_id}"
+  end
+
+  def already_voted?(command)
+    event_store
+      .read
+      .stream(stream_name(command.event_id))
+      .to_a
+      .any? { |event| event.data[:user_id] == command.user_id }
   end
 end
